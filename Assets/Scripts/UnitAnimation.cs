@@ -8,6 +8,6 @@ public class UnitAnimation : MonoBehaviour
 
     private void Update()
     {
-        animator.SetBool(IS_WALKING, unit.IsWalking);
+        animator.SetBool(IS_WALKING, unit.GetMoveAction().IsWalking);
     }
 }
