@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GridSystemVisual : MonoBehaviour
 {
@@ -31,10 +29,7 @@ public class GridSystemVisual : MonoBehaviour
 
     private void Update()
     {
-        HideAllGridPosition();
-
-        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
-        ShowGridPositionList(selectedUnit.GetMoveAction().GetValidActionGridPositionList());
+        UpdateGridVisual();
     }
 
     private void HideAllGridPosition()
@@ -51,5 +46,13 @@ public class GridSystemVisual : MonoBehaviour
         {
             gridSystemVisualSingleArray[gridPosition.x, gridPosition.z].Show();
         }
+    }
+
+    private void UpdateGridVisual()
+    {
+        HideAllGridPosition();
+
+        BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
+        ShowGridPositionList(selectedAction.GetValidActionGridPositionList());
     }
 }
