@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class SpinAction : MonoBehaviour
+public class SpinAction : BaseAction
 {
-    private bool isActive;
     private float totalSpinAmount;
 
     private void Update()
@@ -23,13 +21,15 @@ public class SpinAction : MonoBehaviour
         {
             //Unit made the whole circle
             isActive = false;
+            OnActionComplete();
         }
 
     }
 
-    public void Spin()
+    public void Spin(Action OnActionComplete)
     {
         totalSpinAmount = 0f;
         isActive = true;
+        this.OnActionComplete = OnActionComplete;
     }
 }
