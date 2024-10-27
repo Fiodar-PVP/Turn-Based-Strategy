@@ -92,4 +92,9 @@ public class MoveAction : BaseAction
         this.OnActionComplete = OnActionComplete;
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
     }
+
+    public override string GetActionName()
+    {
+        return "Move";
+    }
 }
