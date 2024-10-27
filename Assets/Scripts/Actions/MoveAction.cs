@@ -24,7 +24,7 @@ public class MoveAction : BaseAction
             return;
         }
 
-        float stoppingDistance = 0.1f;
+        float stoppingDistance = 0.01f;
         if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
@@ -43,13 +43,7 @@ public class MoveAction : BaseAction
         }
     }
 
-    public bool IsValidActionGridPosition(GridPosition gridPosition)
-    {
-        List<GridPosition> validActionGridPositionList = GetValidActionGridPositionList();
-        return validActionGridPositionList.Contains(gridPosition);
-    }
-
-    public List<GridPosition> GetValidActionGridPositionList()
+    public override List<GridPosition> GetValidActionGridPositionList()
     {
         List<GridPosition> validActionGridPositionList = new List<GridPosition>();
 
@@ -86,7 +80,7 @@ public class MoveAction : BaseAction
         return validActionGridPositionList;
     }
 
-    public void Move(GridPosition gridPosition, Action OnActionComplete)
+    public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
         isActive = true;
         this.OnActionComplete = OnActionComplete;
