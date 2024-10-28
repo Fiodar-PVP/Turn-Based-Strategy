@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     private const int MAX_ACTION_POINTS = 2;
 
+    public static event EventHandler OnAnyActionPointsChanged;
+
     private MoveAction moveAction;
     private SpinAction spinAction;
     private BaseAction[] baseActionArray;
     private GridPosition gridPosition;
-    private int currentActionPoints;
+    private int currentActionPoints = MAX_ACTION_POINTS;
 
     private void Awake()
     {
@@ -19,11 +22,12 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
+
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(this, gridPosition);
-        ResetActionPoints();
+        
     }
-
     private void Update()
     {
 
@@ -34,6 +38,12 @@ public class Unit : MonoBehaviour
             gridPosition = newGridPosition;
         }
     }
+
+    private void TurnSystem_OnTurnChanged(object sender, System.EventArgs e)
+    {
+        ResetActionPoints();
+    }
+
 
     public MoveAction GetMoveAction()
     {
@@ -58,6 +68,8 @@ public class Unit : MonoBehaviour
     public void ResetActionPoints()
     {
         currentActionPoints = MAX_ACTION_POINTS;
+
+        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
@@ -68,6 +80,8 @@ public class Unit : MonoBehaviour
     private void SpendActionPoints(int amoint)
     {
         currentActionPoints -= amoint;
+
+        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool TryToSpendActionPoints(BaseAction baseAction)
