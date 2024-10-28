@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour
 
     public static event EventHandler OnAnyActionPointsChanged;
 
+    [SerializeField] private bool isEnemy;
+    
     private MoveAction moveAction;
     private SpinAction spinAction;
     private BaseAction[] baseActionArray;
@@ -26,8 +28,8 @@ public class Unit : MonoBehaviour
 
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(this, gridPosition);
-        
     }
+
     private void Update()
     {
 
@@ -41,7 +43,11 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChanged(object sender, System.EventArgs e)
     {
-        ResetActionPoints();
+        if (isEnemy && !TurnSystem.Instance.IsPlayerTurn() ||
+            !isEnemy && TurnSystem.Instance.IsPlayerTurn())
+        {
+            ResetActionPoints();
+        }
     }
 
 
@@ -100,5 +106,10 @@ public class Unit : MonoBehaviour
     public int GetActionPoints()
     {
         return currentActionPoints;
+    }
+
+    public bool IsEnemy()
+    {
+        return isEnemy;
     }
 }
