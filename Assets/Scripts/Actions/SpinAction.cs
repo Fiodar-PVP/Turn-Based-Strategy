@@ -21,8 +21,7 @@ public class SpinAction : BaseAction
         if(totalSpinAmount >= 360f) 
         {
             //Unit made the whole circle
-            isActive = false;
-            OnActionComplete();
+            ActionComplete();
         }
 
     }
@@ -30,8 +29,8 @@ public class SpinAction : BaseAction
     public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
         totalSpinAmount = 0f;
-        isActive = true;
-        this.OnActionComplete = OnActionComplete;
+
+        ActionStart(OnActionComplete);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()

@@ -71,6 +71,11 @@ public class Unit : MonoBehaviour
         return gridPosition;
     }
 
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
+
     public void ResetActionPoints()
     {
         currentActionPoints = MAX_ACTION_POINTS;
@@ -111,5 +116,11 @@ public class Unit : MonoBehaviour
     public bool IsEnemy()
     {
         return isEnemy;
+    }
+
+    public void Damage()
+    {
+        //For testing purposes
+        Debug.Log(transform + " Damaged!");
     }
 }
