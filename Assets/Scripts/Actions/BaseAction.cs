@@ -29,4 +29,16 @@ public abstract class BaseAction : MonoBehaviour
     public abstract List<GridPosition> GetValidActionGridPositionList();
 
     public abstract void TakeAction(GridPosition gridPosition, Action OnActionComplete);
+
+    protected virtual void ActionStart(Action OnActionComplete)
+    {
+        isActive = true;
+        this.OnActionComplete = OnActionComplete;
+    }
+
+    protected virtual void ActionComplete()
+    {
+        isActive = false;
+        OnActionComplete();
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveAction : BaseAction
 {
-    [SerializeField] private int maxMoveDistance = 2;
+    [SerializeField] private int maxMoveDistance = 4;
 
     private Vector3 targetPosition;
 
@@ -38,8 +38,8 @@ public class MoveAction : BaseAction
         else
         {
             IsWalking = false;
-            isActive = false;
-            OnActionComplete();
+
+            ActionComplete();
         }
     }
 
@@ -61,7 +61,14 @@ public class MoveAction : BaseAction
                     continue;
                 }
 
-                if(testGridPosition == unitGridPosition)
+                int targetDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (targetDistance > maxMoveDistance)
+                {
+                    //Make action work within fixed radius (use circle instead of square)
+                    continue;
+                }
+
+                if (testGridPosition == unitGridPosition)
                 {
                     //Unit is already located in that GridPosition
                     continue;
@@ -82,8 +89,8 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        isActive = true;
-        this.OnActionComplete = OnActionComplete;
+        ActionStart(OnActionComplete);
+
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
     }
 
