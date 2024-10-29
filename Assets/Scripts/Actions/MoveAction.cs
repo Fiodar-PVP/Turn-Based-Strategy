@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MoveAction : BaseAction
 {
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
+
     [SerializeField] private int maxMoveDistance = 4;
 
     private Vector3 targetPosition;
-
-    public bool IsWalking { get; private set; }
 
     protected override void Awake()
     {
@@ -30,14 +31,13 @@ public class MoveAction : BaseAction
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
             float moveSpeed = 4f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
-            IsWalking = true;
 
             float rotateSpeed = 10f;
             transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotateSpeed * Time.deltaTime);
         }
         else
         {
-            IsWalking = false;
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
 
             ActionComplete();
         }
@@ -89,9 +89,11 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        ActionStart(OnActionComplete);
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
 
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        
+        ActionStart(OnActionComplete);
     }
 
     public override string GetActionName()
