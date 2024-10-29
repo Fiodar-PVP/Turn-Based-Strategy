@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private bool isEnemy;
     
+    private HealthSystem healthSystem;
     private MoveAction moveAction;
     private SpinAction spinAction;
     private BaseAction[] baseActionArray;
@@ -17,10 +18,14 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
+        healthSystem = GetComponent<HealthSystem>();
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
         baseActionArray = GetComponentsInChildren<BaseAction>();
+
+        healthSystem.OnDie += HealthSystem_OnDie;
     }
+
 
     private void Start()
     {
@@ -118,9 +123,15 @@ public class Unit : MonoBehaviour
         return isEnemy;
     }
 
-    public void Damage()
+    public void Damage(int damageAmount)
     {
-        //For testing purposes
-        Debug.Log(transform + " Damaged!");
+        healthSystem.Damage(damageAmount);
+    }
+
+    private void HealthSystem_OnDie(object sender, EventArgs e)
+    {
+        LevelGrid.Instance.RemoveUnitAtGridPosition(this, gridPosition);
+
+        Destroy(gameObject);
     }
 }
