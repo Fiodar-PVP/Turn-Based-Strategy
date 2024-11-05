@@ -1064,11 +1064,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3823017242610448988, guid: a89b81f90be1d194bb0939ef0af702e7,
-        type: 3}
-      propertyPath: maxMoveDistance
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6390686676445980323, guid: a89b81f90be1d194bb0939ef0af702e7,
         type: 3}
       propertyPath: m_Name
@@ -1818,6 +1813,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSystemVisualSinglePrefab: {fileID: 1476986547243011533, guid: e4a3c4fb1422bec4e87d878b2f67a7de,
     type: 3}
+  gridVisualTypeMaterialList:
+  - gridVisualType: 0
+    material: {fileID: 2100000, guid: 6fc1fad730372d5428c05539a7f69b04, type: 2}
+  - gridVisualType: 1
+    material: {fileID: 2100000, guid: 444ebf55f6ab7461eb32d48972d03fc2, type: 2}
+  - gridVisualType: 2
+    material: {fileID: 2100000, guid: f8fa2ff07395343f386a60e0477903e6, type: 2}
+  - gridVisualType: 3
+    material: {fileID: 2100000, guid: dfd0c1fc4390b410fb056076613af382, type: 2}
+  - gridVisualType: 4
+    material: {fileID: 2100000, guid: be5716aafb270451d8db9b839c09d63e, type: 2}
 --- !u!1 &1196604696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,7 +2369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f277286a3d334e44982e477bb0ad775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionCameraGameObject: {fileID: 0}
+  actionCameraGameObject: {fileID: 826566583}
 --- !u!4 &1690342751
 Transform:
   m_ObjectHideFlags: 0
