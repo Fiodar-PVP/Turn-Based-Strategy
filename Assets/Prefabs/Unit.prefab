@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c71985f0141460ba3d4f70871028a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveDistance: 2
+  maxMoveDistance: 4
 --- !u!114 &4800508523197333286
 MonoBehaviour:
   m_ObjectHideFlags: 0
