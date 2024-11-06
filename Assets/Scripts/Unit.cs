@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
     private HealthSystem healthSystem;
     private MoveAction moveAction;
     private SpinAction spinAction;
+    private ShootAction shootAction;
     private BaseAction[] baseActionArray;
     private GridPosition gridPosition;
     private int currentActionPoints = MAX_ACTION_POINTS;
@@ -23,6 +24,7 @@ public class Unit : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        shootAction = GetComponent<ShootAction>();
         baseActionArray = GetComponentsInChildren<BaseAction>();
 
         healthSystem.OnDie += HealthSystem_OnDie;
@@ -71,6 +73,11 @@ public class Unit : MonoBehaviour
         return spinAction;
     }
 
+    public ShootAction GetShootAction()
+    {
+        return shootAction;
+    }
+
     public BaseAction[] GetBaseActionArray()
     {
         return baseActionArray;
@@ -93,7 +100,7 @@ public class Unit : MonoBehaviour
         OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
+    public bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
         return currentActionPoints >= baseAction.GetActionPoinstCost();
     }
@@ -141,4 +148,6 @@ public class Unit : MonoBehaviour
 
         OnAnyUnitDied?.Invoke(this, EventArgs.Empty);
     }
+
+    public float GetNormalizedHealth() => healthSystem.GetHealthNormalized();
 }
