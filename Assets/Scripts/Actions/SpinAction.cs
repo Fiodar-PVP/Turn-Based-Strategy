@@ -18,7 +18,7 @@ public class SpinAction : BaseAction
         transform.eulerAngles += new Vector3(0f, addSpinAmount, 0f);
         totalSpinAmount += addSpinAmount;
 
-        if(totalSpinAmount >= 360f) 
+        if (totalSpinAmount >= 360f)
         {
             //Unit made the whole circle
             ActionComplete();
@@ -47,5 +47,14 @@ public class SpinAction : BaseAction
     public override int GetActionPoinstCost()
     {
         return 1;
+    }
+
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 0,
+        };
     }
 }
