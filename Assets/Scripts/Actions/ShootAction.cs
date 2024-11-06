@@ -13,7 +13,7 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private int maxShootDistance = 7;
-    
+
     private enum State
     {
         Aiming,
@@ -40,14 +40,14 @@ public class ShootAction : BaseAction
                 Vector3 aimDirection = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
                 float rotationSpeed = 10f;
                 transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotationSpeed * Time.deltaTime);
-                break; 
+                break;
             case State.Shooting:
                 if (canShootBullet)
                 {
                     canShootBullet = false;
                     Shoot();
                 }
-                break; 
+                break;
             case State.Cooloff:
                 break;
         }
@@ -84,7 +84,7 @@ public class ShootAction : BaseAction
         {
             targetUnit = targetUnit,
             shootingUnit = unit
-        }) ;
+        });
 
         int damageAmount = 40;
         targetUnit.Damage(damageAmount);
@@ -97,9 +97,14 @@ public class ShootAction : BaseAction
 
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        GridPosition unitGridPosition = unit.GetGridPosition();
+        return GetValidActionGridPositionList(unitGridPosition);
+    }
+
+    public List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition)
+    {
         List<GridPosition> validActionGridPositionList = new List<GridPosition>();
 
-        GridPosition unitGridPosition = unit.GetGridPosition();
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
@@ -114,7 +119,7 @@ public class ShootAction : BaseAction
                 }
 
                 int testtDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if(testtDistance > maxShootDistance)
+                if (testtDistance > maxShootDistance)
                 {
                     //Make action work within fixed radius (use circle instead of square)
                     continue;
@@ -127,7 +132,7 @@ public class ShootAction : BaseAction
                 }
 
                 Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
-                if(targetUnit.IsEnemy() == unit.IsEnemy())
+                if (targetUnit.IsEnemy() == unit.IsEnemy())
                 {
                     //Target Unit belongs to the "same" team
                     continue;
@@ -161,5 +166,21 @@ public class ShootAction : BaseAction
     public int GetMaxShootDistance()
     {
         return maxShootDistance;
+    }
+
+    public int GetTargetCountAtGridPosition(GridPosition gridPosition)
+    {
+        return GetValidActionGridPositionList(gridPosition).Count;
+    }
+
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetNormalizedHealth()) * 100),
+        };
     }
 }
