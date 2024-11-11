@@ -9,7 +9,7 @@ public class LevelGrid : MonoBehaviour
     public static LevelGrid Instance;
 
     [SerializeField] Transform gridDebugObject;
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
 
     private void Awake()
     {
@@ -22,7 +22,8 @@ public class LevelGrid : MonoBehaviour
 
         Instance = this;
 
-        gridSystem = new GridSystem(10, 20, 2);
+        gridSystem = new GridSystem<GridObject>(10, 20, 2,
+            (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
         gridSystem.CreateGridDebugObject(gridDebugObject);
     }
 
