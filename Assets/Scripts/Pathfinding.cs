@@ -10,6 +10,7 @@ public class Pathfinding : MonoBehaviour
     public static Pathfinding Instance { get; private set; }
 
     [SerializeField] private Transform gridDebugObjectPrefab;
+    [SerializeField] private LayerMask obstaclesLayerMask;
 
     private GridSystem<PathNode> gridSystem;
 
@@ -51,6 +52,20 @@ public class Pathfinding : MonoBehaviour
         gridSystem = new GridSystem<PathNode>(height, width, cellSize,
             (GridSystem<PathNode> gridSystem, GridPosition gridPosition) => new PathNode(gridPosition));
         gridSystem.CreateGridDebugObject(gridDebugObjectPrefab);
+
+        for(int x = 0; x < gridSystem.GetWidth(); x++)
+        {
+            for(int z = 0; z < gridSystem.GetHeight(); z++)
+            {
+                GridPosition gridPosition = new GridPosition(x, z);
+                Vector3 worldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+                float raycastOffsetDistance = 5f;
+                if(Physics.Raycast(worldPosition - Vector3.up * raycastOffsetDistance, Vector3.up, raycastOffsetDistance * 2, obstaclesLayerMask))
+                {
+                    GetPathNode(x, z).SetIsWalkable(false);
+                }
+            }
+        }
     }
 
     public List<GridPosition> FindPath(GridPosition startGridPosition, GridPosition endGridPosition)
@@ -99,6 +114,12 @@ public class Pathfinding : MonoBehaviour
                 if (closedList.Contains(neighbour))
                 {
                     //We have already checked that node
+                    continue;
+                }
+
+                if (!neighbour.IsWalkable())
+                {
+                    closedList.Add(neighbour);
                     continue;
                 }
 
