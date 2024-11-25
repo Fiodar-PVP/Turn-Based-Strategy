@@ -13,6 +13,7 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private int maxShootDistance = 7;
+    [SerializeField] private LayerMask obstaclesLayerMask;
 
     private enum State
     {
@@ -135,6 +136,20 @@ public class ShootAction : BaseAction
                 if (targetUnit.IsEnemy() == unit.IsEnemy())
                 {
                     //Target Unit belongs to the "same" team
+                    continue;
+                }
+
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+                float unitShoulderHeight = 1.7f;
+
+                if(Physics.Raycast(
+                    unitWorldPosition + Vector3.up * unitShoulderHeight,
+                    shootDirection,
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                    obstaclesLayerMask))
+                {
+                    //Blocked by obstacle
                     continue;
                 }
 
