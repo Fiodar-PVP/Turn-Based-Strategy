@@ -10,7 +10,8 @@ public class UnitRagdoll : MonoBehaviour
 
         float explosionForce = 300f;
         float explosionRadius = 10f;
-        ApplyExplosionToRagdoll(ragdollRootBone, explosionForce, transform.position, explosionRadius);
+        Vector3 explosionOffset = new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
+        ApplyExplosionToRagdoll(ragdollRootBone, explosionForce, transform.position + explosionOffset, explosionRadius);
     }
 
     private void MatchAllChildTransform(Transform originalRootBone, Transform cloneRootBone)
