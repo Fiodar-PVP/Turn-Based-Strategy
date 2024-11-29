@@ -92,7 +92,7 @@ public class MoveAction : BaseAction
                 }
 
                 int pathfindingDistanceMultiplier = 10;
-;               if(Pathfinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > maxMoveDistance * pathfindingDistanceMultiplier)
+                if(Pathfinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > maxMoveDistance * pathfindingDistanceMultiplier)
                 {
                     //Path length is too long
                     continue;
