@@ -1727,7 +1727,7 @@ PrefabInstance:
     - target: {fileID: 1735384766535627030, guid: a89b81f90be1d194bb0939ef0af702e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1735384766535627030, guid: a89b81f90be1d194bb0939ef0af702e7,
         type: 3}
@@ -1737,7 +1737,7 @@ PrefabInstance:
     - target: {fileID: 1735384766535627030, guid: a89b81f90be1d194bb0939ef0af702e7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1735384766535627030, guid: a89b81f90be1d194bb0939ef0af702e7,
         type: 3}
@@ -5444,7 +5444,7 @@ PrefabInstance:
     - target: {fileID: 7975010894109474103, guid: 467d85643b3d1484a98850172fd57661,
         type: 3}
       propertyPath: m_Name
-      value: DestructibleCrate
+      value: Crate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
