@@ -74,4 +74,9 @@ public class GrenadeAction : BaseAction
     {
         ActionComplete();
     }
+
+    public int GetMaxThrowDistance()
+    {
+        return maxThrowDistance;
+    }
 }
