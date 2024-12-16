@@ -47,8 +47,8 @@ public class GrenadeAction : BaseAction
                     continue;
                 }
 
-                int testtDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testtDistance > maxThrowDistance)
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (testDistance > maxThrowDistance)
                 {
                     //Make action work within fixed radius (use circle instead of square)
                     continue;
