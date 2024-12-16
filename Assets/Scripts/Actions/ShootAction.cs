@@ -126,8 +126,8 @@ public class ShootAction : BaseAction
                     continue;
                 }
 
-                int testtDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testtDistance > maxShootDistance)
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (testDistance > maxShootDistance)
                 {
                     //Make action work within fixed radius (use circle instead of square)
                     continue;

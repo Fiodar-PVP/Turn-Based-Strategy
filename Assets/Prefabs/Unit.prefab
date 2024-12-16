@@ -730,6 +730,7 @@ GameObject:
   - component: {fileID: 2728602028070304293}
   - component: {fileID: 3602876310148643111}
   - component: {fileID: 1674439374727480432}
+  - component: {fileID: 5777852657102576039}
   - component: {fileID: 8774889403076861668}
   - component: {fileID: -1679791832697544087}
   m_Layer: 7
@@ -877,6 +878,18 @@ MonoBehaviour:
   grenadeProjectilePrefab: {fileID: 698488945584203988, guid: 9a26e160184fb49679d2e796720e05ec,
     type: 3}
   maxThrowDistance: 7
+--- !u!114 &5777852657102576039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390686676445980323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3523ff479ce4bea87dee2dd6176ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8774889403076861668
 MonoBehaviour:
   m_ObjectHideFlags: 0
