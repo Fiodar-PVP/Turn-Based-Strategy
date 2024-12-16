@@ -112,6 +112,9 @@ public class GridSystemVisual : MonoBehaviour
 
                 ShowGridPositionRangeSquare(selectedUnit.GetGridPosition(), swordAction.GetMaxSlashDistance(), GridVisualType.SoftRed);
                 break;
+            case InteractAction interactAction:
+                gridVisualType = GridVisualType.Blue;
+                break;
         }
 
         ShowGridPositionList(selectedAction.GetValidActionGridPositionList(), gridVisualType);
@@ -135,8 +138,8 @@ public class GridSystemVisual : MonoBehaviour
                     continue;
                 }
 
-                int testtDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testtDistance > range)
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (testDistance > range)
                 {
                     //Make action work within fixed radius (use circle instead of square)
                     continue;
