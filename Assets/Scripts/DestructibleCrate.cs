@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DestructibleCrate : MonoBehaviour, IDestructable
+public class DestructibleCrate : MonoBehaviour, IDestructible
 {
     public static event EventHandler OnAnyCrateDestruction;
 

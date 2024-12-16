@@ -40,9 +40,9 @@ public class GrenadeProjectile : MonoBehaviour
                     targetUnit.Damage(grenadeDamage);
                 }
 
-                if(collider.TryGetComponent<IDestructable>(out IDestructable destructableObject))
+                if(collider.TryGetComponent<IDestructible>(out IDestructible destructibleObject))
                 {
-                    destructableObject.Destruction();
+                    destructibleObject.Destruction();
                 }
             }
 
