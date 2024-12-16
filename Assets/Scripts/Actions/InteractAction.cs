@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class InteractAction : BaseAction
 {
@@ -59,7 +57,7 @@ public class InteractAction : BaseAction
                     continue;
                 }
 
-                if (!LevelGrid.Instance.HasDoorAtGridPosition(testGridPosition))
+                if (!LevelGrid.Instance.HasInteractableObjectAtGridPosition(testGridPosition))
                 {
                     //No door at this gridPosition
                     continue;
@@ -74,8 +72,8 @@ public class InteractAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        Door door = LevelGrid.Instance.GetDoorAtGridPosition(gridPosition);
-        door.Interact(OnInteractComplete);
+        IInteractable interactable = LevelGrid.Instance.GetInteractableObjectAtGridPosition(gridPosition);
+        interactable.Interact(OnInteractComplete);
 
         ActionStart(OnActionComplete);
     }
