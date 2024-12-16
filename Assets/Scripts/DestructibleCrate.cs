@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DestructibleCrate : MonoBehaviour
+public class DestructibleCrate : MonoBehaviour, IDestructible
 {
     public static event EventHandler OnAnyCrateDestruction;
 
@@ -14,7 +14,7 @@ public class DestructibleCrate : MonoBehaviour
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
     }
 
-    public void Damage()
+    public void Destruction()
     {
         Transform destroyedCrateTranform = Instantiate(destroyedCratePrefab, transform.position, transform.rotation);
 
