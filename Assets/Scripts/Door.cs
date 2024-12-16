@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
     private const string IS_OPEN = "IsOpen";
 
@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetDoorAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.SetInteractableObjectAtGridPosition(gridPosition, this);
 
         if (isOpen)
         {
