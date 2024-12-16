@@ -8,7 +8,7 @@ public class GridObject
     private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
     private List<Unit> unitList;
-    private Door door;
+    private IInteractable interactableObject;
 
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
     {
@@ -55,19 +55,19 @@ public class GridObject
         }
     }
 
-    public Door GetDoor()
+    public IInteractable GetInteractableObject()
     {
-        return door;
+        return interactableObject;
     }
 
-    public void SetDoor(Door door)
+    public void SetInteractableObject(IInteractable interactableObject)
     {
-        this.door = door;
+        this.interactableObject = interactableObject;
     }
 
-    public bool HasDoor()
+    public bool HasInteractableObject()
     {
-        return door != null;
+        return interactableObject != null;
     }
 
     public override string ToString()
