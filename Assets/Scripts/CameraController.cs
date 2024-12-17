@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 
         float moveSpeed = 10f;
 
-        Vector3 moveVector = transform.forward * inputMoveDirection.x + transform.right * inputMoveDirection.y;
+        Vector3 moveVector = transform.forward * inputMoveDirection.y + transform.right * inputMoveDirection.x;
 
         transform.position += moveVector * moveSpeed * Time.deltaTime;
     }
